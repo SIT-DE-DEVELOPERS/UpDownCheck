@@ -15,7 +15,7 @@ java -jar updowncheck-1.0-SNAPSHOT.jar
 
 | Argument | Wert / Beispiel | Optional |
 | --- | --- | --- |
-| token | das Read-Only Token von updown.io, kann hier entnommen werden: https://updown.io/api<br>Beispiel: token=ro-LNpouNLqUEJ9reg6j123 |     |
+| token | das Read-Only Token von updown.io, kann hier entnommen werden: https://updown.io/api<br>Beispiel: token=ro-LNpouNLqUEJ9reg6j123 (das Token ist ungültig und dient nur als Beispiel) |     |
 | watchservice | die URL des updown.io Rest-Service.<br>Beispiel: watchservice=https://updown.io/api/checks |     |
 | command | der Befehl, der ausgeführt werden soll, wenn der überwachte Dienst, auf den upopows zutrifft, down ist. Muss mit Anführungszeichen umgeben sein, wenn er aus mehreren Werten besteht.<br>Beispiel: command="systemctl restart tomcat.service" |     |
 | hostname | Der Hostname des aktuellen Servers, auf dem UpDownChecker läuft. Muss in dem url-Wert des zu überwachenden Dienstes vorkommen.<br>Default: Rückgabewert von `InetAddress.getLocalHost()`<br> Beispiel: hostname=www.beispiel.de | optional |
@@ -95,7 +95,7 @@ java -jar updowncheck-1.0-SNAPSHOT.jar
 
 | Argument | Value / example | optional |
 | --- | --- | --- |
-| token | the read-only token of updown.io, can be taken here: https://updown.io/api<br>Example: token=ro-LNpOuNLqUEJ7reg6j123 |     |
+| token | the read-only token of updown.io, can be taken here: https://updown.io/api<br>Example: token=ro-LNpOuNLqUEJ7reg6j123 (the token is invalid and serves only as an example) |     |
 | watchservice | the URL of the updown.io rest service.<br>Example: watchservice=https://updown.io/api/checks |     |
 | command | the command to execute when the monitored service to which upopows applies is down. Must be surrounded by quotes if it consists of multiple values. <br>Example: command="systemctl restart tomcat.service" |     |
 | hostname | The hostname of the current server on which UpDownChecker is running. Must appear in the url value of the service to be monitored.<br>Default: value of `InetAddress.getLocalHost()`<br>Example: hostname=www.example.com | optional |
