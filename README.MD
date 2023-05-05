@@ -4,7 +4,7 @@ Need an english documentation? Please scroll down.
 
 Der UpDownChecker ist ein Java-Tool, das die API von updown.io nutzt und prüft, ob ein bestimmter Service länger als eine definierte Zeitspanne nicht erreichbar ist. Ist dies der Fall, dann wird ein konfigurierbarer Befehl ausgeführt. Voraussetzung zur Verwendung des UpDownChecker ist Java 11 oder neuer.
 
-Manche Dienste werden in der Systemüberwachung mit Status 'running' angezeigt, sind aber tatsächlich nicht mehr responsiv. Dienste wie updown.io prüfen von außen per Webaufruf, ob ein Dienst noch responsiv ist und geben Alarm, wenn das nicht der Fall ist. Zusätzlich zur GUI unter updown.io bietet updown.io eine API an, die einen Status über alle überwachten Dienste liefert. Der UpDownChecker nutzt diese API und führt bei nicht-Erreichbarkeit eines Service einen Befehl auf der Konsole aus. Dieser kann z.B. den nicht mehr erreichbaren Service neu starten.
+Dienste auf einem Server sind manchmal nicht mehr responsiv, werden aber z.B. via systemctl trotzdem mit Status 'running' angezeigt. Dienste wie updown.io prüfen von außen per Webaufruf, ob ein Dienst noch responsiv ist und geben Alarm, wenn das nicht der Fall ist. Zusätzlich zur GUI unter updown.io bietet updown.io eine API an, die einen Status über alle überwachten Dienste liefert. Der UpDownChecker nutzt diese API und führt bei nicht-Erreichbarkeit eines Service einen Befehl auf der Konsole aus. Dieser kann z.B. den nicht mehr erreichbaren Service neu starten.
 Der Aufruf von UpDownChecker kann z.B. regelmäßig per crontab erfolgen.
 
 # Verwendung
@@ -84,7 +84,7 @@ Test ausführen:
 
 The UpDownChecker is a Java tool that uses the API of updown.io and checks if a certain service is down for longer than a defined period of time. If this is the case, then a configurable command is executed. A prerequisite for using the UpDownChecker is Java 11 or newer.
 
-Some services are displayed in the system monitoring with status 'running', but are actually no longer responsive. Services like updown.io check from the outside via web call if a service is still responsive and give alarm if this is not the case. In addition to the GUI under updown.io, updown.io offers an API that provides a status about all monitored services. The UpDownChecker uses this API and executes a command on the console if a service is not available. This can, for example, restart the unreachable service.
+Services on a server are sometimes no longer responsive, but are still displayed with the status 'running' via systemctl. Services like updown.io check from the outside via web call if a service is still responsive and give alarm if this is not the case. In addition to the GUI under updown.io, updown.io offers an API that provides a status about all monitored services. The UpDownChecker uses this API and executes a command on the console if a service is not available. This can, for example, restart the unreachable service.
 The call of UpDownChecker can be done e.g. regularly via crontab.
 
 # Usage
