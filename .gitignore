@@ -1,0 +1,43 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+app/build
+app/bin
+
+# Logs
+*.log
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Properties file holding token for Unit test:
+config.properties
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+*target*
+*.jar
+*.war
+*.ear
+*.class
+
+# eclipse specific git ignore
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings
+.loadpath
+
+# Locally stored "Eclipse launch configurations"
+*.launch
