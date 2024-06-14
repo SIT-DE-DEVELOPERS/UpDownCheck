@@ -14,9 +14,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "token", "url", "alias", "last_status", "uptime", "down", "down_since", "error", "period",
-		"apdex_t", "string_match", "enabled", "published", "disabled_locations", "recipients", "last_check_at",
-		"next_check_at", "mute_until", "favicon_url", "custom_headers", "http_verb", "http_body", "ssl" })
+@JsonPropertyOrder({ "token", "url", "alias", "last_status", "uptime", "down", "down_since", "up_since", "error",
+		"period", "apdex_t", "string_match", "enabled", "published", "disabled_locations", "recipients",
+		"last_check_at",
+		"next_check_at", "created_at", "mute_until", "favicon_url", "custom_headers", "http_verb", "http_body", "ssl" })
 @Generated("jsonschema2pojo")
 public class Status {
 
@@ -34,6 +35,8 @@ public class Status {
 	private Boolean down;
 	@JsonProperty("down_since")
 	private Object downSince;
+	@JsonProperty("up_since")
+	private Object upSince;
 	@JsonProperty("error")
 	private Object error;
 	@JsonProperty("period")
@@ -54,6 +57,8 @@ public class Status {
 	private String lastCheckAt;
 	@JsonProperty("next_check_at")
 	private String nextCheckAt;
+	@JsonProperty("created_at")
+	private String createdAt;
 	@JsonProperty("mute_until")
 	private Object muteUntil;
 	@JsonProperty("favicon_url")
@@ -135,6 +140,16 @@ public class Status {
 	@JsonProperty("down_since")
 	public void setDownSince(Object downSince) {
 		this.downSince = downSince;
+	}
+
+	@JsonProperty("up_since")
+	public Object getUpSince() {
+		return upSince;
+	}
+
+	@JsonProperty("up_since")
+	public void setUpSince(Object upSince) {
+		this.upSince = upSince;
 	}
 
 	@JsonProperty("error")
@@ -235,6 +250,16 @@ public class Status {
 	@JsonProperty("next_check_at")
 	public void setNextCheckAt(String nextCheckAt) {
 		this.nextCheckAt = nextCheckAt;
+	}
+
+	@JsonProperty("created_at")
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	@JsonProperty("created_at")
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	@JsonProperty("mute_until")
