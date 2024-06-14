@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'de.sit'
-version '1.0-SNAPSHOT'
+version '1.1-SNAPSHOT'
 
 sourceCompatibility = 11
 
@@ -25,7 +25,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'de.sit.status.App'
+                'Main-Class': 'de.sit.status.App' 
         )
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -34,7 +34,7 @@ jar {
     }
     
     archiveBaseName = 'updowncheck'
-    archiveVersion = '1.0-SNAPSHOT'
+    archiveVersion = '1.1-SNAPSHOT'
 }
 
 test {
