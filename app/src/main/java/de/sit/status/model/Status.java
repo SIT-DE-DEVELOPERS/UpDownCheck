@@ -1,10 +1,3 @@
-/*package de.sit.updowncheck.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-public record Status(String type, Value value) { }
-*/
 package de.sit.status.model;
 
 import java.util.List;
@@ -14,10 +7,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "token", "url", "alias", "last_status", "uptime", "down", "down_since", "up_since", "error",
-		"period", "apdex_t", "string_match", "enabled", "published", "disabled_locations", "recipients",
+@JsonPropertyOrder({
+		"token",
+		"url",
+		"alias",
+		"last_status",
+		"uptime",
+		"down",
+		"down_since",
+		"up_since",
+		"error",
+		"period",
+		"apdex_t",
+		"string_match",
+		"enabled",
+		"published",
+		"disabled_locations",
+		"recipients",
 		"last_check_at",
-		"next_check_at", "created_at", "mute_until", "favicon_url", "custom_headers", "http_verb", "http_body", "ssl" })
+		"next_check_at",
+		"created_at",
+		"mute_until",
+		"favicon_url",
+		"custom_headers",
+		"http_verb",
+		"http_body",
+		"ssl"
+})
 @Generated("jsonschema2pojo")
 public class Status {
 
@@ -34,11 +50,11 @@ public class Status {
 	@JsonProperty("down")
 	private Boolean down;
 	@JsonProperty("down_since")
-	private Object downSince;
+	private String downSince;
 	@JsonProperty("up_since")
-	private Object upSince;
+	private String upSince;
 	@JsonProperty("error")
-	private Object error;
+	private String error;
 	@JsonProperty("period")
 	private Integer period;
 	@JsonProperty("apdex_t")
@@ -60,7 +76,7 @@ public class Status {
 	@JsonProperty("created_at")
 	private String createdAt;
 	@JsonProperty("mute_until")
-	private Object muteUntil;
+	private String muteUntil;
 	@JsonProperty("favicon_url")
 	private String faviconUrl;
 	@JsonProperty("custom_headers")
@@ -133,32 +149,32 @@ public class Status {
 	}
 
 	@JsonProperty("down_since")
-	public Object getDownSince() {
+	public String getDownSince() {
 		return downSince;
 	}
 
 	@JsonProperty("down_since")
-	public void setDownSince(Object downSince) {
+	public void setDownSince(String downSince) {
 		this.downSince = downSince;
 	}
 
 	@JsonProperty("up_since")
-	public Object getUpSince() {
+	public String getUpSince() {
 		return upSince;
 	}
 
 	@JsonProperty("up_since")
-	public void setUpSince(Object upSince) {
+	public void setUpSince(String upSince) {
 		this.upSince = upSince;
 	}
 
 	@JsonProperty("error")
-	public Object getError() {
+	public String getError() {
 		return error;
 	}
 
 	@JsonProperty("error")
-	public void setError(Object error) {
+	public void setError(String error) {
 		this.error = error;
 	}
 
@@ -263,12 +279,12 @@ public class Status {
 	}
 
 	@JsonProperty("mute_until")
-	public Object getMuteUntil() {
+	public String getMuteUntil() {
 		return muteUntil;
 	}
 
 	@JsonProperty("mute_until")
-	public void setMuteUntil(Object muteUntil) {
+	public void setMuteUntil(String muteUntil) {
 		this.muteUntil = muteUntil;
 	}
 

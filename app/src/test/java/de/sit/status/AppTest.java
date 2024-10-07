@@ -17,30 +17,30 @@ import org.junit.jupiter.api.Test;
 import de.sit.status.model.Status;
 
 class AppTest {
-	
-    String[] args = {"token", "watchservice", "command", "hostname", "upopows"};
-	
+
+    String[] args = { "token", "apikey", "watchservice", "command", "hostname", "upopows" };
+
     @Test
     void testGetStatus() throws MalformedURLException, IOException {
         // Arrange
-        String updownIoRestUrl = "https://updown.io/api/checks";
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
         Properties prop = new Properties();
         prop.load(inputStream);
         String token = prop.getProperty("token");
-        
+        String apikey = prop.getProperty("apikey");
+        String updownIoRestUrl = "https://updown.io/api/checks/" + token;
+
         // Act
-        Status[] statuses = App.getStatus(updownIoRestUrl, token);
-        
+        Status[] statuses = App.getStatus(updownIoRestUrl, apikey);
+
         // Assert
         assertNotNull(statuses);
         assertTrue(statuses.length > 0);
     }
-    
+
     @Test
-    void testGetHostName()
-    {
-    	assertNotNull(App.getHostName(), "Return of getHostName() is not null");
-    	assertNotEquals("",App.getHostName(), "Return of getHostName() is not an empty string");
+    void testGetHostName() {
+        assertNotNull(App.getHostName(), "Return of getHostName() is not null");
+        assertNotEquals("", App.getHostName(), "Return of getHostName() is not an empty string");
     }
 }

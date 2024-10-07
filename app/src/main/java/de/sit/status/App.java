@@ -14,71 +14,62 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.sit.status.model.Status;
 
 public class App {
 
-    //private static final Logger log = LoggerFactory.getLogger(App.class);
+    // private static final Logger log = LoggerFactory.getLogger(App.class);
     private static final Logger log = LogManager.getLogger(App.class.getName());
 
     public static void main(String[] args) throws Exception {
         // printMessage(args);
-    	log.info("UpDownChecker started..");
-               
+        log.info("UpDownChecker started..");
+
         // upopows = url-path or port of watched service
-        String[] arguments = {"token", "watchservice", "command", "hostname", "upopows", "minutes"};
+        String[] arguments = { "token", "apikey", "watchservice", "command", "hostname", "upopows", "minutes" };
         HashMap<String, String> m = new HashMap<String, String>();
-        
-        for(String a : args)
-        {
-        	for(String d : arguments)
-        	{
-            	if(a.toLowerCase().contains(d))
-            	{
-            		m.put(d, a.substring(a.indexOf("=")+1, a.length()));
-            	}
-        	}
+
+        for (String a : args) {
+            for (String d : arguments) {
+                if (a.toLowerCase().contains(d)) {
+                    m.put(d, a.substring(a.indexOf("=") + 1, a.length()));
+                }
+            }
         }
-        
-        
-        Status[] readValue = getStatus(m.get("watchservice"), m.get("token"));
-        if(m.get("hostname") == null)
-        {
-        	m.put("hostname", getHostName());
-        	log.info("The hostname in use is: " + m.get("hostname"));
+
+        String url4Check = m.get("watchservice") + "/" + m.get("token");
+
+        Status[] readValue = getStatus(url4Check, m.get("apikey"));
+        if (m.get("hostname") == null) {
+            m.put("hostname", getHostName());
+            log.info("The hostname in use is: " + m.get("hostname"));
+        } else {
+            log.info("The hostname in use is: " + m.get("hostname") + " ('hostname' argument)");
         }
-        else
-        {
-        	log.info("The hostname in use is: " + m.get("hostname")+ " ('hostname' argument)");	
-        }
-        
+
         int matchinghosts = 0;
-        
+
         for (Status s : readValue) {
-            if (s != null && s.getUrl() != null && s.getUrl().indexOf(m.get("hostname")) > -1 && s.getUrl().indexOf(m.get("upopows")) > -1) {
-            	log.info("Checking status of "+s.getUrl() + " (monitoring enabled: "+s.getEnabled().booleanValue()+")");
-            	
-            	if(s.getDown().booleanValue())
-            	{
-            		log.info("--> Service is down!");	
-            	}
-            	else
-            	{
-            		log.info("\u2705 Service is available.");
-            	}
-            	
-            	
-            	matchinghosts++;
-            	
-                if (s.getDown().booleanValue() && s.getEnabled().booleanValue())
-                {
+            if (s != null && s.getUrl() != null && s.getUrl().indexOf(m.get("hostname")) > -1
+                    && s.getUrl().indexOf(m.get("upopows")) > -1) {
+                log.info("Checking status of " + s.getUrl() + " (monitoring enabled: " + s.getEnabled().booleanValue()
+                        + ")");
+
+                if (s.getDown().booleanValue()) {
+                    log.info("--> Service is down!");
+                } else {
+                    log.info("\u2705 Service is available.");
+                }
+
+                matchinghosts++;
+
+                if (s.getDown().booleanValue() && s.getEnabled().booleanValue()) {
                     String down_since = (String) s.getDownSince();
                     Instant dsi = Instant.parse(down_since);
 
@@ -87,49 +78,47 @@ public class App {
                     log.info("\u26A0 Tomcat is down since " + duration.toMinutes() + " minutes.");
 
                     int mins = 90;
-                    if(m.get("minutes") != null)
-                    {
-                    	mins = Integer.parseInt(m.get("minutes"));	
+                    if (m.get("minutes") != null) {
+                        mins = Integer.parseInt(m.get("minutes"));
                     }
-                    
-                    
+
                     if (duration.toMinutes() > mins) {
-                        
-						try {
-							log.info("\u26A0 Watched service "+s.getUrl()+" is longer than "+mins+ " down!");
-							Process process = Runtime.getRuntime().exec(m.get("command"));
-							log.info("\u27A1 Executing command: "+m.get("command")+":");
-							
-							BufferedReader reader = new BufferedReader(
-									new InputStreamReader(process.getInputStream()));
-							
-							String line;
-							while ((line = reader.readLine()) != null) {
-								log.info("--> "+line);
-							}
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+
+                        try {
+                            log.info("\u26A0 Watched service " + s.getUrl() + " is longer than " + mins + " down!");
+                            Process process = Runtime.getRuntime().exec(m.get("command"));
+                            log.info("\u27A1 Executing command: " + m.get("command") + ":");
+
+                            BufferedReader reader = new BufferedReader(
+                                    new InputStreamReader(process.getInputStream()));
+
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                log.info("--> " + line);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
         }
-        
-        if(matchinghosts == 0)
-        {
-        	log.info("Results from "+m.get("watchservice")+" contained no match for "+m.get("hostname")+" and "+m.get("upopows"));
+
+        if (matchinghosts == 0) {
+            log.info("Results from " + m.get("watchservice") + " contained no match for " + m.get("hostname") + " and "
+                    + m.get("upopows"));
         }
 
         log.info("UpDownChecker run completed.");
     }
-    
-    
-    static Status[] getStatus(String updownIoRestUrl, String token) throws MalformedURLException, IOException
-    {
+
+    static Status[] getStatus(String updownIoRestUrl, String apikey)
+            throws MalformedURLException, IOException {
         URLConnection conn = new URL(updownIoRestUrl).openConnection();
-        conn.setRequestProperty("X-API-KEY", token);
-        conn.setRequestProperty("Accept Encoding", "gzip");
-        
+
+        conn.setRequestProperty("X-API-KEY", apikey);
+        // conn.setRequestProperty("Accept Encoding", "gzip");
+
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
@@ -139,14 +128,14 @@ public class App {
         in.close();
 
         ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         String testJson = response.toString();
         Status[] readValue = mapper.readValue(testJson, Status[].class);
-        
+
         return readValue;
     }
-    
-    static String getHostName()
-    {
+
+    static String getHostName() {
         try {
             InetAddress addr = InetAddress.getLocalHost();
             return addr.getHostName();

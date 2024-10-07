@@ -34,7 +34,7 @@ jar {
     }
     
     archiveBaseName = 'updowncheck'
-    archiveVersion = '1.1-SNAPSHOT'
+    archiveVersion = '1.2-SNAPSHOT'
 }
 
 test {

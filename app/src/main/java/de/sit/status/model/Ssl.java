@@ -17,7 +17,7 @@ public class Ssl {
 	@JsonProperty("valid")
 	private Boolean valid;
 	@JsonProperty("error")
-	private Object error;
+	private String error;
 
 	@JsonProperty("tested_at")
 	public String getTestedAt() {
@@ -50,12 +50,12 @@ public class Ssl {
 	}
 
 	@JsonProperty("error")
-	public Object getError() {
+	public String getError() {
 		return error;
 	}
 
 	@JsonProperty("error")
-	public void setError(Object error) {
+	public void setError(String error) {
 		this.error = error;
 	}
 }
